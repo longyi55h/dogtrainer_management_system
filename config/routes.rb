@@ -1,4 +1,5 @@
 DogtrainerManagementSystem::Application.routes.draw do
+  devise_for :users
   # get "static_pages/login"
   # match '/login', to: 'static_pages#login', via: 'get'
   root 'static_pages#login'
