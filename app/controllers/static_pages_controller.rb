@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
-  def login
+
+  def show
   end
 end

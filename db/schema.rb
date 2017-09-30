@@ -11,7 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925063857) do
+ActiveRecord::Schema.define(version: 20170929110925) do
+
+  create_table "owners", force: true do |t|
+    t.integer  "user_id",                       null: false
+    t.string   "owner_lastname",   limit: 20,   null: false
+    t.string   "owner_firstname",  limit: 20,   null: false
+    t.datetime "owner_birthday",                null: false
+    t.string   "job",              limit: 20,   null: false
+    t.integer  "zipcode",          limit: 10,   null: false
+    t.string   "province",         limit: 10,   null: false
+    t.string   "city",             limit: 20,   null: false
+    t.string   "street",           limit: 20,   null: false
+    t.integer  "phone_number",     limit: 15,   null: false
+    t.integer  "family1",          limit: 3
+    t.integer  "family2",          limit: 3
+    t.integer  "family3",          limit: 3
+    t.integer  "family4",          limit: 3
+    t.integer  "family5",          limit: 3
+    t.datetime "family1_birthday"
+    t.datetime "family2_birthday"
+    t.datetime "family3_birthday"
+    t.datetime "family4_birthday"
+    t.datetime "family5_birthday"
+    t.integer  "house_type",       limit: 3
+    t.integer  "house_floor",      limit: 3
+    t.integer  "main_manager",     limit: 3
+    t.text     "notes",            limit: 1000
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
