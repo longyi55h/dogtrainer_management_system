@@ -15,15 +15,15 @@ ActiveRecord::Schema.define(version: 20170930104159) do
 
   create_table "owners", force: true do |t|
     t.integer  "user_id",                       null: false
-    t.string   "owner_lastname",   limit: 20,   null: false
-    t.string   "onwer_firstname",  limit: 20,   null: false
-    t.datetime "owner_birthday",                null: false
-    t.string   "job",              limit: 20,   null: false
-    t.integer  "zipcode",          limit: 10,   null: false
-    t.string   "province",         limit: 10,   null: false
-    t.string   "city",             limit: 20,   null: false
-    t.string   "street",           limit: 20,   null: false
-    t.integer  "phone_number",     limit: 15,   null: false
+    t.string   "owner_lastname",   limit: 20
+    t.string   "owner_firstname",  limit: 20
+    t.datetime "owner_birthday"
+    t.string   "job",              limit: 20
+    t.integer  "zipcode",          limit: 10
+    t.string   "province",         limit: 10
+    t.string   "city",             limit: 20
+    t.string   "street",           limit: 20
+    t.integer  "phone_number",     limit: 15
     t.integer  "family1",          limit: 3
     t.integer  "family2",          limit: 3
     t.integer  "family3",          limit: 3
