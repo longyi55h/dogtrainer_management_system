@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929110925) do
+ActiveRecord::Schema.define(version: 20170930104159) do
 
   create_table "owners", force: true do |t|
     t.integer  "user_id",                       null: false
     t.string   "owner_lastname",   limit: 20,   null: false
-    t.string   "owner_firstname",  limit: 20,   null: false
+    t.string   "onwer_firstname",  limit: 20,   null: false
     t.datetime "owner_birthday",                null: false
     t.string   "job",              limit: 20,   null: false
     t.integer  "zipcode",          limit: 10,   null: false
@@ -29,11 +29,11 @@ ActiveRecord::Schema.define(version: 20170929110925) do
     t.integer  "family3",          limit: 3
     t.integer  "family4",          limit: 3
     t.integer  "family5",          limit: 3
-    t.datetime "family1_birthday"
-    t.datetime "family2_birthday"
-    t.datetime "family3_birthday"
-    t.datetime "family4_birthday"
-    t.datetime "family5_birthday"
+    t.datetime "family1_birthday", limit: 3
+    t.datetime "family2_birthday", limit: 3
+    t.datetime "family3_birthday", limit: 3
+    t.datetime "family4_birthday", limit: 3
+    t.datetime "family5_birthday", limit: 3
     t.integer  "house_type",       limit: 3
     t.integer  "house_floor",      limit: 3
     t.integer  "main_manager",     limit: 3
