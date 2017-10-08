@@ -1,4 +1,9 @@
 <li>
-    <%= owner.owner_firstname %>
-    <%= owner.owner_lastname %>
+    <%= link_to "#{owner.owner_lastname}" + "#{owner.owner_firstname}", edit_owner_path(owner) %>
+    <span><%= owner.prefecture.name %></span>
+    <span><%= owner.city %></span>
+    <span><%= owner.street %></span>
+    <span><%= "#{owner.phone_number1}" + "-" + "#{owner.phone_number2}" + "-" + "#{owner.phone_number3}" %></span>
+    <span>犬名</span>
+
 </li>

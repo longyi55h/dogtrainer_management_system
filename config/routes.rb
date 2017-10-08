@@ -1,15 +1,16 @@
 DogtrainerManagementSystem::Application.routes.draw do
-  get "owners/show"
-  get "dogs/show"
+  get "owners/index"
+  get "dogs/index"
   # get "users/show"
   devise_for :users, :controllers => {
     :registrations => "registrations"
   }
   resources :users, only: [:show]
+  resources :owners
   # get "static_pages/login"
   # match '/login', to: 'static_pages#login', via: 'get'
   # root 'static_pages#login'
-  root 'dogs#show'
+  root 'dogs#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

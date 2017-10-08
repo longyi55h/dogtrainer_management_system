@@ -1,0 +1,8 @@
+<h1>Owners#index</h1>
+<p>Find me in app/views/owners/index.html.erb</p>
+<% if @user.owners.any? %>
+<ol>
+    <%= render @owners %>
+</ol>
+<% end %>
+<%= link_to "新規登録", new_owner_path %>

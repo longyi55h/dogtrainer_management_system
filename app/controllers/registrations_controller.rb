@@ -2,7 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     def after_sign_up_path_for(resource)
         # user_path(resource)
-        dogs_show_path
+        dogs_index_path
     end
     
     private
