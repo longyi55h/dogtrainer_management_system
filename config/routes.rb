@@ -7,6 +7,7 @@ DogtrainerManagementSystem::Application.routes.draw do
   }
   resources :users, only: [:show]
   resources :owners
+  resources :dogs
   # get "static_pages/login"
   # match '/login', to: 'static_pages#login', via: 'get'
   # root 'static_pages#login'

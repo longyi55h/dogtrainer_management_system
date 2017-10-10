@@ -2,7 +2,7 @@ class OwnersController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @user = User.find(1)
+    @user = User.find(1)#引数は変数に変更
     @owners = @user.owners
   end
   

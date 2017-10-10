@@ -1,0 +1,6 @@
+<li>
+    <%= link_to "#{dog.dog_name}", edit_dog_path(dog) %>
+    <span><%= dog.dog_breed %></span>
+    <span><%= (Date.today.try(:strftime, "%Y%m%d").to_i - dog.dog_birthday.try(:strftime, "%Y%m%d").to_i) / 10000 %></span>
+
+</li>
