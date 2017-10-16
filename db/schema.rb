@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009074153) do
+ActiveRecord::Schema.define(version: 20171010090642) do
+
+  create_table "dogkartes", force: true do |t|
+    t.integer  "dog_id",                              null: false
+    t.integer  "owner_id",                            null: false
+    t.datetime "training_date"
+    t.integer  "training_session",       limit: 3
+    t.integer  "training_times",         limit: 3
+    t.integer  "training_status",        limit: 3
+    t.integer  "training_dogwalk_times", limit: 3
+    t.integer  "training_dogwalk_hours", limit: 3
+    t.string   "training_detail",        limit: 1000
+    t.string   "training_image_path1",   limit: 50
+    t.string   "training_image_path2",   limit: 50
+    t.string   "training_image_path3",   limit: 50
+    t.string   "training_image_path4",   limit: 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "dogs", force: true do |t|
     t.integer  "user_id",                                        null: false

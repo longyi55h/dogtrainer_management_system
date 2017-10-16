@@ -2,19 +2,23 @@ class DogsController < ApplicationController
     before_action :authenticate_user!
     
     def index
-        @user = User.find(1)#引数は変数に変更
+        @user = User.find(current_user.id)
         @dogs = @user.dogs
+        @owners = @user.owners
+        logger.debug @owners.inspect
     end
     
     def new
-        @dog = current_user.dogs.build if signed_in?
+        @owner = Owner.find(params[:owner_id])
+        @dog = @owner.dogs.build if signed_in?
     end
     
     def create
-        @dog = current_user.dogs.build(dog_params)
-        @owner = Owner.find(@dog.user_id)
-        @dog.owner_id = @owner.id
-        if @dog.save
+        @owner = Owner.find(params[:owner_id])
+        @dog = @owner.dogs.build(dog_params)
+        @dog.user_id = current_user.id
+        @owner.dog_id = @dog.id
+        if @dog.save && @owner.update_attributes(owner_params)
             flash[:success] = "ドッグ作成！"
             redirect_to '/dogs'
         else
@@ -23,6 +27,7 @@ class DogsController < ApplicationController
     end
     
     def edit
+        @owner = Owner.find(params[:owner_id])
         @dog = Dog.find(params[:id])
     end
     
@@ -40,6 +45,7 @@ class DogsController < ApplicationController
     
         def dog_params
             params.require(:dog).permit(
+                :owner_id,
                 :dog_name,
                 :dog_breed,
                 :dog_birthday,
@@ -80,6 +86,10 @@ class DogsController < ApplicationController
                 :applied_command4,
                 :applied_command5,
                 :notes)
+        end
+        
+        def owner_params
+            params.require(:owner).permit(:owner_id)
         end
 
 end

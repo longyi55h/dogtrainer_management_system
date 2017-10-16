@@ -1,4 +1,5 @@
 DogtrainerManagementSystem::Application.routes.draw do
+  get "dogkartes/index"
   get "owners/index"
   get "dogs/index"
   # get "users/show"
@@ -6,8 +7,12 @@ DogtrainerManagementSystem::Application.routes.draw do
     :registrations => "registrations"
   }
   resources :users, only: [:show]
-  resources :owners
-  resources :dogs
+  resources :owners do
+    resources :dogs
+  end
+  resources :dogs do
+    resources :dogkartes
+  end
   # get "static_pages/login"
   # match '/login', to: 'static_pages#login', via: 'get'
   # root 'static_pages#login'

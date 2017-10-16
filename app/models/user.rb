@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :dogs
-  has_many :owners
+  has_many :owners, through: :dogs
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

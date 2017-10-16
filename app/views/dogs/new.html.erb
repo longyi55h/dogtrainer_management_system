@@ -1,6 +1,6 @@
 <h1>Dogs#new</h1>
 <p>Find me in app/views/dogs/new.html.erb</p>
-<%= form_for @dog, html: { class: 'form-horizontal'} do |f| %>
+<%= form_for [@owner, @dog], html: { class: 'form-horizontal'} do |f| %>
     <div>
         <div>
             <img src="">画像</img>
@@ -11,6 +11,7 @@
     </div>
     <div>
         <p>オーナー名：
+            <%= @owner.owner_lastname %><%= @owner.owner_firstname %>
         </p>
         <p>犬名：
             <%= f.text_field :dog_name %>
