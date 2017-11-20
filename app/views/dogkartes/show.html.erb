@@ -1,0 +1,37 @@
+<h1>Dogkartes#show</h1>
+<p>Find me in app/views/dogkartes/show.html.erb</p>
+    <div >
+        <div class="dog-image">
+            <%= image_tag @dog.dog_image_path.thumb.url %>
+        </div>
+        <div>
+            <p>オーナー：
+                <%= "#{@dog.owner.owner_lastname}#{@dog.owner.owner_firstname}" %>
+            </p>
+            <p>名前：<%= @dog.dog_name %></p>
+            <p>年齢：
+            <%= "#{(Date.today.try(:strftime, "%Y%m%d").to_i - @dog.dog_birthday.try(:strftime, "%Y%m%d").to_i) / 10000}歳" if @dog.dog_birthday? %>
+            </p>
+            <p>犬種：<%= @dog.dog_breed %></p>
+        </div>
+    </div>
+    <div class="training-contents-section">
+        <p>トレーニング日時：<%= @dogkarte.training_date.strftime("%Y/%m/%d") %></p>
+        <p>セッション：<%= @dogkarte.training_session %></p>
+        <p>トレーニング回数：<%= @dogkarte.training_times %>回</p>
+        <p>ステータス：<%= @dogkarte.training_status %></p>
+        <p>散歩回数/1日：<%= @dogkarte.training_dogwalk_times %>回</p>
+        <p>散歩時間（合計）：<%= @dogkarte.training_dogwalk_hours %>時間</p>
+        <p>トレーニング詳細：<%= @dogkarte.training_detail %></p>
+    </div>
+    <div class="dog-image-section3">
+        <div class="dog-image">
+            <%= image_tag @dogkarte.training_image_path1.thumb.url %>
+            <%= image_tag @dogkarte.training_image_path2.thumb.url %>
+            <%= image_tag @dogkarte.training_image_path3.thumb.url %>
+            <%= image_tag @dogkarte.training_image_path4.thumb.url %>
+        </div>
+        <%= link_to "編集", edit_dog_dogkarte_path(@dog, @dogkarte) %>
+        <%= link_to "キャンセル", :back %>
+        <%= link_to "カルテ一覧", dog_dogkartes_path(@dog) %>
+    </div>

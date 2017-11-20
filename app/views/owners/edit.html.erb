@@ -9,9 +9,6 @@
             <P>生年月日：
                 <%= f.date_field :owner_birthday %>
             </P>
-            <p>年齢：
-                <%= (Date.today.try(:strftime, "%Y%m%d").to_i - f.object.owner_birthday.try(:strftime, "%Y%m%d").to_i) / 10000 %>
-            </p>
             <p>職業：
                 <%= f.text_field :job %>
             </p>
@@ -68,5 +65,4 @@
         </div>
         <%= f.submit "編集" %>
         <%= link_to "キャンセル", :back %>
-        <%= link_to "ドッグ登録", new_owner_dog_path(@owner) %>
 <% end %>

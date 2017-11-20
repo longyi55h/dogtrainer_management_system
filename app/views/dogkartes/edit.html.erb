@@ -3,36 +3,51 @@
 <%= form_for [@dog, @dogkarte], html: { class: 'form-horizontal' } do |f| %>
     <div >
         <div class="dog-image">
-            <img src="">画像</img>
+            <%= image_tag @dog.dog_image_path.thumb.url %>
         </div>
         <div>
-            <p>オーナー名：<%= @owner.owner_lastname %><%= @owner.owner_firstname %></p>
-            <p>犬名：<%= @dog.dog_name %></p>
-            <p>犬年齢：
-                <%= (Date.today.try(:strftime, "%Y%m%d").to_i - @dog.dog_birthday.try(:strftime, "%Y%m%d").to_i) / 10000 %>
+            <p>オーナー：<%= @dog.owner.owner_lastname %><%= @dog.owner.owner_firstname %></p>
+            <p>名前：<%= @dog.dog_name %></p>
+            <p>年齢：
+                <%= "#{(Date.today.try(:strftime, "%Y%m%d").to_i - @dog.dog_birthday.try(:strftime, "%Y%m%d").to_i) / 10000}歳" if @dog.dog_birthday? %>
             </p>
             <p>犬種：<%= @dog.dog_breed %></p>
-            
-            <% if false %>
-            <p><%= f.text_field :dog_name %>犬名：ココ</p>
-            <p><%= f.text_field :dog_age %>年齢：2歳1カ月</p>
-            <p><%= f.text_field :dog_breed %>犬種：ボストンテリア</p>
-            <% end %>
         </div>
     </div>
     <div class="training-contents-section">
-        <p><%= f.date_field :training_date %>トレーニング日時：2017/09/08</p>
-        <p><%= f.select :training_session, (1..99), :include_blank => true %>セッション：1</p>
-        <p><%= f.select :training_times, (1..99), :include_blank => true %>トレーニング回数：2</p>
-        <p><%= f.select :training_status, {"開始" => "開始", "トレーニング中" => "トレーニング中", "完了" => "完了" }, :include_blank => true %>ステータス：トレーニング中</p>
-        <p><%= f.select :training_dogwalk_times, (1..9), :include_blank => true %>散歩回数／1日：回</p>
-        <p><%= f.select :training_dogwalk_hours, (1..9), :include_blank => true %>散歩時間（合計）：時間</p>
-        <p><%= f.text_area :training_detail, :size => "60x10" %>トレーニング詳細：</p>
+        <p>トレーニング日時：<%= f.date_field :training_date %></p>
+        <p>セッション：<%= f.select :training_session, (1..99), :include_blank => true %></p>
+        <p>トレーニング回数：<%= f.select :training_times, (1..99), :include_blank => true %></p>
+        <p>ステータス：<%= f.select :training_status, {"開始" => "開始", "トレーニング中" => "トレーニング中", "完了" => "完了" }, :include_blank => true %></p>
+        <p>散歩回数／1日：<%= f.select :training_dogwalk_times, (1..9), :include_blank => true %>回</p>
+        <p>散歩時間（合計）：<%= f.select :training_dogwalk_hours, (1..9), :include_blank => true %>時間</p>
+        <p>トレーニング詳細：<%= f.text_area :training_detail, :size => "60x10" %></p>
     </div>
 
     <div class="dog-image-section3">
-        <div class="dog-image">
-            <img src="">画像</img>
+        <div>
+            <%= f.label :training_image_path1, 'Upload training image...' %><br>
+            <%= image_tag @dogkarte.training_image_path1.thumb.url if @dogkarte.training_image_path1? %>
+            <%= f.file_field :training_image_path1 %>
+            <%= f.hidden_field :training_image_path1_cache %>
+        </div>
+        <div>
+            <%= f.label :training_image_path2, 'Upload training image...' %><br>
+            <%= image_tag @dogkarte.training_image_path2.thumb.url if @dogkarte.training_image_path2? %>
+            <%= f.file_field :training_image_path2 %>
+            <%= f.hidden_field :training_image_path2_cache %>
+        </div>
+        <div>
+            <%= f.label :training_image_path3, 'Upload training image...' %><br>
+            <%= image_tag @dogkarte.training_image_path3.thumb.url if @dogkarte.training_image_path3? %>
+            <%= f.file_field :training_image_path3 %>
+            <%= f.hidden_field :training_image_path3_cache %>
+        </div>
+        <div>
+            <%= f.label :training_image_path4, 'Upload training image...' %><br>
+            <%= image_tag @dogkarte.training_image_path4.thumb.url if @dogkarte.training_image_path4? %>
+            <%= f.file_field :training_image_path4 %>
+            <%= f.hidden_field :training_image_path4_cache %>
         </div>
     </div>
     <%= f.submit "編集" %>

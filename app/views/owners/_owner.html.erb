@@ -1,8 +1,8 @@
 <li>
-    <%= link_to "#{owner.owner_lastname}" + "#{owner.owner_firstname}", edit_owner_path(owner) %>
+    <%= link_to "#{owner.owner_lastname}#{owner.owner_firstname}", owner_path(owner) %>
+    <span><%= JpPrefecture::Prefecture.find(owner.prefecture_code).name if owner.prefecture_code? %></span>
     <span><%= owner.city %></span>
     <span><%= owner.street %></span>
     <span><%= "#{owner.phone_number1}" + "-" + "#{owner.phone_number2}" + "-" + "#{owner.phone_number3}" %></span>
-    <span>犬名</span>
-
+    <%= link_to "削除", owner_path(owner), method: :delete %>
 </li>

@@ -3,6 +3,11 @@
 <%= form_for @owner, html: { class: 'form-horizontal' } do |f| %>
 
         <div>
+            <p>犬名：
+                <%= f.fields_for :dog do |dog_form| %>
+                    <%= dog_form.text_field :dog_name %>
+                <% end %>
+            </p>
             <P>オーナー名：
                 <%= f.text_field :owner_lastname %>
                 <%= f.text_field :owner_firstname %>

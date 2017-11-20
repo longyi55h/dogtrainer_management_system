@@ -3,41 +3,50 @@ class DogsController < ApplicationController
     
     def index
         @user = User.find(current_user.id)
-        @dogs = @user.dogs
-        @owners = @user.owners
-        logger.debug @owners.inspect
+    end
+    
+    def show
+        @dog = Dog.find(params[:id])
     end
     
     def new
-        @owner = Owner.find(params[:owner_id])
-        @dog = @owner.dogs.build if signed_in?
+        @dog = Dog.new
+        @dog.build_owner
     end
     
     def create
-        @owner = Owner.find(params[:owner_id])
-        @dog = @owner.dogs.build(dog_params)
+        @dog = Dog.new(dog_params)
+        @dog.owner.user_id = current_user.id
         @dog.user_id = current_user.id
-        @owner.dog_id = @dog.id
-        if @dog.save && @owner.update_attributes(owner_params)
+        if @dog.save
             flash[:success] = "ドッグ作成！"
-            redirect_to '/dogs'
+            redirect_to dog_path(@dog)
         else
             render 'dogs/new'
         end
     end
     
     def edit
-        @owner = Owner.find(params[:owner_id])
         @dog = Dog.find(params[:id])
     end
     
     def update
         @dog = Dog.find(params[:id])
         if @dog.update_attributes(dog_params)
-            flash[:success] = "ドッグ編集！"
-            redirect_to '/dogs'
+            flash[:success] = 'ドッグ編集！'
+            redirect_to dog_path
         else
             render 'edit'
+        end
+    end
+    
+    def destroy
+        @dog = Dog.find(params[:id])
+        if @dog.destroy
+            flash[:success] = 'ドッグ削除！'
+            redirect_to dogs_path
+        else
+            render dogs_path
         end
     end
     
@@ -45,7 +54,6 @@ class DogsController < ApplicationController
     
         def dog_params
             params.require(:dog).permit(
-                :owner_id,
                 :dog_name,
                 :dog_breed,
                 :dog_birthday,
@@ -85,7 +93,11 @@ class DogsController < ApplicationController
                 :applied_command3,
                 :applied_command4,
                 :applied_command5,
-                :notes)
+                :notes,
+                :dog_image_path,
+                :dog_image_path_cache,
+                owner_attributes: [:id, :owner_firstname, :owner_lastname]
+                )
         end
         
         def owner_params

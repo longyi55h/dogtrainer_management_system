@@ -3,22 +3,25 @@ class OwnersController < ApplicationController
   
   def index
     @user = User.find(current_user.id)
-    @owners = @user.owners
+  end
+  
+  def show
+    @owner = Owner.find(params[:id])
   end
   
   def new
-    @owner = current_user.owners.build if signed_in?
+    @owner = Owner.new if signed_in?
   end
   
-  def create
-    @owner = current_user.owners.build(owner_params)
-    if @owner.save
-      flash[:success] = "オーナー作成！"
-      redirect_to '/owners'
-    else
-      render 'owners/new'
-    end
-  end
+  # def create
+  #   @owner = current_user.owners.build(owner_params)
+  #   if @owner.save
+  #     flash[:success] = "オーナー作成！"
+  #     redirect_to owner_path(@owner)
+  #   else
+  #     render 'owners/new'
+  #   end
+  # end
   
   def edit
     @owner = Owner.find(params[:id])
@@ -27,15 +30,22 @@ class OwnersController < ApplicationController
   def update
     @owner = Owner.find(params[:id])
     if @owner.update_attributes(owner_params)
-      flash[:success] = "オーナー編集！"
-      redirect_to '/owners'
+      flash[:success] = 'オーナー編集！'
+      redirect_to owner_path(@owner)
     else
       # render 'owners/"#{params[:id]}"/edit'
-      render "edit"
+      render 'edit'
     end
   end
   
   def destroy
+    @owner = Owner.find(params[:id])
+    if @owner.destroy
+      flash[:success] = 'オーナー削除！'
+      redirect_to owners_path
+    else
+      render owners_path
+    end
   end
   
   private
@@ -67,6 +77,8 @@ class OwnersController < ApplicationController
         :house_type,
         :house_floor,
         :main_manager,
-        :notes)
+        :notes,
+        dogs_attributes: [:id, :dog_name]
+      )
     end
 end

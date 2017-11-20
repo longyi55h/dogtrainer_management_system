@@ -1,9 +1,9 @@
 <h1>Dogkartes#index</h1>
 <p>Find me in app/views/dogkartes/index.html.erb</p>
-<p>オーナー名：<%= @owner.owner_lastname %><%= @owner.owner_firstname %></p>
-<p>犬名：<%= @dog.dog_name %></p>
-<p>犬年齢：
-    <%= (Date.today.try(:strftime, "%Y%m%d").to_i - @dog.dog_birthday.try(:strftime, "%Y%m%d").to_i) / 10000 %>歳
+<p>オーナー：<%= @owner.owner_lastname %><%= @owner.owner_firstname %></p>
+<p>名前：<%= @dog.dog_name %></p>
+<p>年齢：
+    <%= "#{(Date.today.try(:strftime, "%Y%m%d").to_i - @dog.dog_birthday.try(:strftime, "%Y%m%d").to_i) / 10000}歳" if @dog.dog_birthday? %>
 </p>
 <p>犬種：<%= @dog.dog_breed %></p>
 <%= render @dogkartes %>

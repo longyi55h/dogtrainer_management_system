@@ -7,9 +7,7 @@ DogtrainerManagementSystem::Application.routes.draw do
     :registrations => "registrations"
   }
   resources :users, only: [:show]
-  resources :owners do
-    resources :dogs
-  end
+  resources :owners
   resources :dogs do
     resources :dogkartes
   end
