@@ -28,7 +28,7 @@ class DogImagePathUploader < CarrierWave::Uploader::Base
   # def scale(width, height)
   #   # do something
   # end
-  process :resize_to_limit => [700, 700]
+  process :resize_to_limit => [300, 180]
   process :convert => 'jpg'
 
   # Create different versions of your uploaded files:

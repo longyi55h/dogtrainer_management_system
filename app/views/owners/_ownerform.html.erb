@@ -1,0 +1,162 @@
+<%= form_for @owner, html: { class: 'form-horizontal' } do |f| %>
+<% if request.path_info == new_dog_path || request.path_info == edit_owner_path %>
+    <fieldset>
+<% else %>
+    <fieldset disabled>
+<% end %>
+        <div class='row'>
+            <div class='col-md-4 col-lg-4'>
+                <div class='form-group'>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.label :owner_name, 'オーナー名：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.text_field :owner_lastname, class: 'form-control' %>
+                        <%= f.text_field :owner_firstname, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-4 col-lg-4'>
+                        <%= f.label :owner_birthday, '生年月日：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-7 col-md-offset-1 col-lg-7 col-lg-offset-1'>
+                            <%= f.date_field :owner_birthday, class: 'form-control', style: 'width: 150px' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.label :job, '職業：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-5 col-lg-5'>
+                            <%= f.text_field :job, class: 'form-control' %>
+                    </div>
+                </div>
+                    <h5><b>住所：</b></h5>
+                <div class='form-group'>
+                    <div class='col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1'>
+                        <%= f.label :zipcode, '郵便番号：', class: 'control-label' %>
+                    </div>
+                    <!--<div class='col-lg-7 form-inline'>-->
+                    <div class='col-md-7 col-lg-7 form-inline'>
+                        <%= f.text_field :zipcode1, class: 'form-control', style: 'width: 60px' %>
+                        <span style='margin: 0 5px'>-</span>
+                        <%= f.text_field :zipcode2, class: 'form-control', style: 'width: 70px' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1'>
+                        <%= f.label :prefecture, '都道府県：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-7 col-lg-7'>
+                        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {}, :include_blank => true, class: 'form-control', style: 'width: 120px' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1'>
+                        <%= f.label :city, '市区町村：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-7'>
+                            <%= f.text_field :city, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-lg-4 col-md-offset-1 col-lg-offset-1'>
+                        <%= f.label :street, '番地・建物：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-7'>
+                        <%= f.text_field :street, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-4 col-md-offset-1 col-lg-4 col-lg-offset-1'>
+                        <%= f.label :phone_number, '電話番号：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-12 col-lg-7 form-inline'>
+                        <%= f.telephone_field :phone_number1, class: 'form-control', style: 'width: 58px' %><span style='margin: 0 1px'>-</span>
+                        <%= f.telephone_field :phone_number2, class: 'form-control', style: 'width: 58px' %><span style='margin: 0 1px'>-</span>
+                        <%= f.telephone_field :phone_number3, class: 'form-control', style: 'width: 58px' %>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-3 col-md-offset-1 col-lg-4'>
+                <div class='form-group'>
+                    <h5><b>家族構成：</b></h5>
+                    <div class='col-lg-12'>
+                        <div class='form-inline'>
+                        <%= f.label :family_no, '家族1：', class: 'control-label' %>
+                            <%= f.select :family1, { '配偶者' => '配偶者', '子供' => '子供', '父' => '父', '母' => '母', '兄弟・姉妹' => '兄弟・姉妹', '祖父' => '祖父', '祖母' => '祖母', 'その他' => 'その他' }, {}, :include_blank => true, class: 'form-control', style: 'width: 100px' %>
+                            <%= f.date_field :family1_birthday, class: 'form-control col-lg-offset-1', style: 'width: 150px' %>
+                        </div>
+                        <div class='form-inline'>
+                        <%= f.label :family_no, '家族2：', class: 'control-label' %>
+                            <%= f.select :family2, { '配偶者' => '配偶者', '子供' => '子供', '父' => '父', '母' => '母', '兄弟・姉妹' => '兄弟・姉妹', '祖父' => '祖父', '祖母' => '祖母', 'その他' => 'その他' }, {}, :include_blank => true, class: 'form-control', style: 'width: 100px' %>
+                            <%= f.date_field :family2_birthday, class: 'form-control col-lg-offset-1', style: 'width: 150px' %>
+                        </div>
+                        <div class='form-inline'>
+                        <%= f.label :family_no, '家族3：', class: 'control-label' %>
+                            <%= f.select :family3, { '配偶者' => '配偶者', '子供' => '子供', '父' => '父', '母' => '母', '兄弟・姉妹' => '兄弟・姉妹', '祖父' => '祖父', '祖母' => '祖母', 'その他' => 'その他' }, {}, :include_blank => true, class: 'form-control', style: 'width: 100px' %>
+                            <%= f.date_field :family3_birthday, class: 'form-control col-lg-offset-1', style: 'width: 150px' %>
+                        </div>
+                        <div class='form-inline'>
+                        <%= f.label :family_no, '家族4：', class: 'control-label' %>
+                            <%= f.select :family4, { '配偶者' => '配偶者', '子供' => '子供', '父' => '父', '母' => '母', '兄弟・姉妹' => '兄弟・姉妹', '祖父' => '祖父', '祖母' => '祖母', 'その他' => 'その他' }, {}, :include_blank => true, class: 'form-control', style: 'width: 100px' %>
+                            <%= f.date_field :family4_birthday, class: 'form-control col-lg-offset-1', style: 'width: 150px' %>
+                        </div>
+                        <div class='form-inline'>
+                        <%= f.label :family_no, '家族5：', class: 'control-label' %>
+                            <%= f.select :family5, { '配偶者' => '配偶者', '子供' => '子供', '父' => '父', '母' => '母', '兄弟・姉妹' => '兄弟・姉妹', '祖父' => '祖父', '祖母' => '祖母', 'その他' => 'その他' }, {}, :include_blank => true, class: 'form-control', style: 'width: 100px' %>
+                            <%= f.date_field :family5_birthday, class: 'form-control col-lg-offset-1', style: 'width: 150px' %>
+                        </div>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-lg-4'>
+                        <%= f.label :house_type, '住居：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-6 col-lg-offset-2'>
+                        <%= f.select :house_type, { '個別住宅' => '個別住宅', '集合住宅' => '集合住宅' }, {}, :include_blank => true, class: 'form-control', style: 'width: 100px' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-lg-4'>
+                        <%= f.label :house_floor, '居住階：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-6 col-lg-offset-2'>
+                        <%= f.select :house_floor, (1..99), {}, :include_blank => true, class: 'form-control', style: 'width: 70px' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-lg-4'>
+                        <%= f.label :main_manager, 'メイン世話役：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-6 col-lg-offset-2'>
+                        <%= f.select :main_manager, { '本人' => '本人', '配偶者' => '配偶者', '子供' => '子供', '父' => '父', '母' => '母', '兄弟・姉妹' => '兄弟・姉妹', '祖父' => '祖父', '祖母' => '祖母', 'その他' => 'その他' }, {}, :include_blank => true, class: 'form-control', style: 'width: 100px' %>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-3 col-lg-4'>
+                <div class='form-group'>
+                    <div class='col-lg-3'>
+                        <%= f.label :notes, '備考：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-9'>
+                        <%= f.text_area :notes, :size => '60x20', class: 'form-control' %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class='row'>
+        <div class='col-md-4 col-lg-4'>
+            <div class='form-group'>
+                <% if request.path_info == owner_path %>
+                    <%= link_to '編集', edit_owner_path(@owner), class: 'btn btn-primary' %>
+                    <%= link_to 'キャンセル', :back, class: 'btn btn-primary' %>
+                <% elsif request.path_info == edit_owner_path %>
+                    <%= f.submit '確定', class: 'btn btn-primary' %>
+                    <%= link_to 'キャンセル', :back, class: 'btn btn-primary' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<% end %>

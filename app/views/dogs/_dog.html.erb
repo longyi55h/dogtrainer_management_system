@@ -1,6 +1,6 @@
 <tr>
     <td><%= link_to "#{dog.dog_name}", dog_path(dog) %></td>
     <td><%= dog.dog_breed %></td>
-    <td><%= "#{(Date.today.try(:strftime, "%Y%m%d").to_i - dog.dog_birthday.try(:strftime, "%Y%m%d").to_i) / 10000}歳" if dog.dog_birthday? %></td>
-    <td><%= link_to "削除", dog_path(dog), method: :delete %></td>
+    <td><%= "#{(Date.today.try(:strftime, '%Y%m%d').to_i - dog.dog_birthday.try(:strftime, '%Y%m%d').to_i) / 10000}歳" if dog.dog_birthday? %></td>
+    <td><%= link_to '削除', dog_path(dog), method: :delete %></td>
 </tr>

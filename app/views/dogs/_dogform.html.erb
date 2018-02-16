@@ -1,0 +1,319 @@
+<%= form_for @dog, html: { class: 'form-horizontal' } do |f| %>
+<% if request.path_info == new_dog_path || request.path_info == edit_dog_path %>
+    <fieldset>
+<% else %>
+    <fieldset disabled>
+<% end %>
+        <div class='row'>
+            <div class='col-md-3 col-lg-3'>
+                <div class='form-group'>
+                    <% if request.path_info == new_dog_path %>
+                        <img src='http://placehold.jp/250x150.png?text=犬の画像' class='thumbnail'>
+                        <%= f.label :dog_image_path, '画像登録', class: 'control-label btn btn-primary' %>
+                        <%= f.file_field :dog_image_path, class: 'fileInput', style: 'display:none' %>
+                        <%= f.hidden_field :dog_image_path_cache %>
+                    <% elsif request.path_info == dog_path %>
+                        <% if @dog.dog_image_path? %>
+                            <%= image_tag @dog.dog_image_path.thumb.url %>
+                        <% else %>
+                            <img src='http://placehold.jp/250x150.png?text=犬の画像' class='thumbnail'>
+                        <% end %>
+                    <% else %>
+                        <% if @dog.dog_image_path? %>
+                            <%= image_tag @dog.dog_image_path.thumb.url %>
+                        <% else %>
+                            <img src='http://placehold.jp/250x150.png?text=犬の画像' class='thumbnail'>
+                        <% end %>
+                        <%= f.label :dog_image_path, '画像編集', class: 'control-label btn btn-primary' %>
+                        <%= f.file_field :dog_image_path, class: 'fileInput', style: 'display:none' %>
+                        <%= f.hidden_field :dog_image_path_cache %>
+                    <% end %>
+                </div>
+
+            </div>
+            <div class='col-md-3 col-lg-3'>
+                <div class='form-group'>
+                    <div class='col-lg-5'>
+                        <%= f.label :owner_name, 'オーナー名：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-7'>
+                        <%= f.fields_for :owner do |owner_form| %>
+                            <%= owner_form.text_field :owner_lastname, class: 'form-control' %>
+                            <%= owner_form.text_field :owner_firstname, class: 'form-control' %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4 col-lg-4'>
+                <div class='form-group'>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.label :dog_name, '犬名：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-7 col-lg-6 col-lg-offset-1'>
+                        <%= f.text_field :dog_name, class: 'form-control col-sm-4' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.label :dog_breed, '犬種：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-7 col-lg-6 col-lg-offset-1'>
+                        <%= f.text_field :dog_breed, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.label :dog_birthday, '犬生年月日：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-7 col-lg-6 col-lg-offset-1'>
+                        <%= f.date_field :dog_birthday, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.label :food_type, '食事タイプ：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-7 col-lg-6 col-lg-offset-1'>
+                        <%= f.select :food_type, { 'ドッグフード' => 'ドッグフード', '手作り食' => '手作り食', '生食' => '生食', 'その他' => 'その他' }, { include_blank: true }, { class: 'form-control' } %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.label :food_times, '食事回数/1日：', class: 'control-label'%>
+                    </div>
+                    <div class='col-md-4 col-lg-3 col-lg-offset-3'>
+                        <%= f.select :food_times, (1..9), { include_blank: true }, { class: 'form-control' } %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.label :favorite_snack, '好きなおやつ：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-6 col-lg-offset-1'>
+                        <%= f.text_field :favorite_snack1, class: 'form-control' %>
+                        <%= f.text_field :favorite_snack2, class: 'form-control' %>
+                        <%= f.text_field :favorite_snack3, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-lg-5'>
+                        <%= f.label :favorite_toy, '好きなおもちゃ：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-6 col-lg-offset-1'>
+                        <%= f.text_field :favorite_toy1, class: 'form-control' %>
+                        <%= f.text_field :favorite_toy2, class: 'form-control' %>
+                        <%= f.text_field :favorite_toy3, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-lg-5'>
+                        <%= f.label :clinical_history, '注意点：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-6 col-lg-offset-1'>
+                        <%= f.text_field :clinical_history1, class: 'form-control' %>
+                        <%= f.text_field :clinical_history2, class: 'form-control' %>
+                        <%= f.text_field :clinical_history3, class: 'form-control' %>
+                        <%= f.text_field :clinical_history4, class: 'form-control' %>
+                        <%= f.text_field :clinical_history5, class: 'form-control' %>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class='col-md-4 col-lg-4'>
+                <div class='form-group'>
+                    <div class='col-md-7 col-lg-7'>
+                        <%= f.label :dogwalk_times, '散歩回数/1日：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-4 col-lg-3 col-lg-offset-2'>
+                        <%= f.select :dogwalk_times, (1..9), { include_blank: true }, { class: 'form-control' } %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-7 col-lg-7'>
+                        <%= f.label :dogwalk_hours, '散歩時間/1回：', class: 'control-label' %>
+                    </div>    
+                    <div class='col-md-4 col-lg-3 col-lg-offset-2'>
+                        <%= f.select :dogwalk_hours, (1..9), { include_blank: true }, { class: 'form-control' } %>
+                    </div>
+                </div>
+
+
+                    <h5><b>性格：</b></h5>
+                    <div class='form-group'>
+                        <div class='col-md-6 col-lg-6 col-lg-offset-1'>
+                            <%= f.label :character1, '人への興味・反応：', class: 'control-label' %>
+                        </div>
+                        <div class='col-md-4 col-lg-4 col-lg-offset-1 form-control' style='width:auto'>
+                            <%= f.radio_button :character1, 'A' %><b>A</b>
+                            <%= f.radio_button :character1, 'B' %><b>B</b>
+                            <%= f.radio_button :character1, 'C' %><b>C</b>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <div class='col-md-6 col-lg-6 col-lg-offset-1'>
+                            <%= f.label :character2, '好奇心：', class: 'control-label' %>
+                        </div>
+                        <div class='col-md-4 col-lg-4 col-lg-offset-1 form-control' style='width:auto'>
+                            <%= f.radio_button :character2, 'A' %><b>A</b>
+                            <%= f.radio_button :character2, 'B' %><b>B</b>
+                            <%= f.radio_button :character2, 'C' %><b>C</b>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <div class='col-md-6 col-lg-6 col-lg-offset-1'>
+                            <%= f.label :character3, '服従心：', class: 'control-label' %>
+                        </div>
+                        <div class='col-md-4 col-lg-4 col-lg-offset-1 form-control' style='width:auto'>
+                            <%= f.radio_button :character3, 'A' %><b>A</b>
+                            <%= f.radio_button :character3, 'B' %><b>B</b>
+                            <%= f.radio_button :character3, 'C' %><b>C</b>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <div class='col-md-6 col-lg-6 col-lg-offset-1'>
+                            <%= f.label :character4, '人との協調性：', class: 'control-label' %>
+                        </div>
+                        <div class='col-md-4 col-lg-4 col-lg-offset-1 form-control' style='width:auto'>
+                            <%= f.radio_button :character4, 'A' %><b>A</b>
+                            <%= f.radio_button :character4, 'B' %><b>B</b>
+                            <%= f.radio_button :character4, 'C' %><b>C</b>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <div class='col-md-6 col-lg-6 col-lg-offset-1'>
+                            <%= f.label :character5, '人への愛情表現：', class: 'control-label' %>
+                        </div>
+                        <div class='col-md-4 col-lg-4 col-lg-offset-1 form-control' style='width:auto'>
+                            <%= f.radio_button :character5, 'A' %><b>A</b>
+                            <%= f.radio_button :character5, 'B' %><b>B</b>
+                            <%= f.radio_button :character5, 'C' %><b>C</b>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <div class='col-md-6 col-lg-6 col-lg-offset-1'>
+                            <%= f.label :character6, '適応能力：', class: 'control-label' %>
+                        </div>
+                        <div class='col-md-4 col-lg-4 col-lg-offset-1 form-control' style='width:auto'>
+                            <%= f.radio_button :character6, 'A' %><b>A</b>
+                            <%= f.radio_button :character6, 'B' %><b>B</b>
+                            <%= f.radio_button :character6, 'C' %><b>C</b>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <div class='col-md-6 col-lg-6 col-lg-offset-1'>
+                            <%= f.label :character7, '興奮性：', class: 'control-label' %>
+                        </div>
+                        <div class='col-md-4 col-lg-4 col-lg-offset-1 form-control' style='width:auto'>
+                            <%= f.radio_button :character7, 'A' %><b>A</b>
+                            <%= f.radio_button :character7, 'B' %><b>B</b>
+                            <%= f.radio_button :character7, 'C' %><b>C</b>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <div class='col-md-6 col-lg-6 col-lg-offset-1'>
+                            <%= f.label :character8, '集中力：', class: 'control-label' %>
+                        </div>
+                        <div class='col-md-4 col-lg-4 col-lg-offset-1 form-control' style='width:auto'>
+                            <%= f.radio_button :character8, 'A' %><b>A</b>
+                            <%= f.radio_button :character8, 'B' %><b>B</b>
+                            <%= f.radio_button :character8, 'C' %><b>C</b>
+                        </div>
+                    </div>
+
+
+            </div>
+
+
+            <div class='col-md-4 col-lg-4'>
+                <div class='form-group'>
+                    <div class='col-md-5 col-lg-5'>
+                        <%= f.label :command_language, 'コマンド言語：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-7 col-lg-6 col-lg-offset-1'>
+                        <%= f.text_field :command_language, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-lg-12'>
+                        <h5><b>基本コマンド：</b></h5>
+                        <div class='col-md-6 col-lg-6'>
+                            <div class='checkbox'>
+                                <label class='checkbox'>
+                                    <%= f.check_box :basic_command1, :as => :boolean %><b>オスワリ</b>
+                                </label>
+                            </div>
+                            <div class='checkbox'>
+                                <label class='checkbox'>
+                                    <%= f.check_box :basic_command2, :as => :boolean %><b>フセ</b>
+                                </label>
+                            </div>
+                            <div class='checkbox'>
+                                <label class='checkbox'>
+                                    <%= f.check_box :basic_command3, :as => :boolean %><b>マテ</b>
+                                </label>
+                            </div>
+                        </div>
+                        <div class='col-md-6 col-lg-6'>
+                            <div class='checkbox'>
+                                <label class='checkbox'>
+                                    <%= f.check_box :basic_command4, :as => :boolean %><b>オイデ</b>
+                                </label>
+                            </div>
+                            <div class='checkbox'>
+                                <label class='checkbox'>
+                                    <%= f.check_box :basic_command5, :as => :boolean %><b>タッテ</b>
+                                </label>
+                            </div>
+                            <div class='checkbox'>
+                                <label class='checkbox'>
+                                    <%= f.check_box :basic_command6, :as => :boolean %><b>ツイテ</b>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-lg-5'>
+                        <%= f.label :applied_command, '応用コマンド：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-6 col-lg-offset-1'>
+                        <%= f.text_field :applied_command1, class: 'form-control' %>
+                        <%= f.text_field :applied_command2, class: 'form-control' %>
+                        <%= f.text_field :applied_command3, class: 'form-control' %>
+                        <%= f.text_field :applied_command4, class: 'form-control' %>
+                        <%= f.text_field :applied_command5, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-lg-3'>
+                        <%= f.label :notes, '備考：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-9'>
+                        <%= f.text_area :notes, :size => '60x10', class: 'form-control' %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class='row'>
+        <div class='col-md-4 col-lg-4'>
+            <div class='form-group'>
+                <% if request.path_info == new_dog_path %>
+                    <%= f.submit '新規登録', class: 'btn btn-primary' %>
+                    <%= link_to 'キャンセル', :back, class: 'btn btn-primary' %>
+                <% elsif request.path_info == dog_path %>
+                    <%= link_to '編集', edit_dog_path(@dog.id), class: 'btn btn-primary' %>
+                    <%= link_to 'カルテ登録', new_dog_dogkarte_path(@dog), class: 'btn btn-primary' %>
+                    <%= link_to 'カルテ一覧', dog_dogkartes_path(@dog), class: 'btn btn-primary' %>
+                    <%= link_to 'キャンセル', :back, class: 'btn btn-primary' %>
+                <% elsif request.path_info == edit_dog_path %>
+                    <%= f.submit '確定', class: 'btn btn-primary' %>
+                    <%= link_to 'キャンセル', :back, class: 'btn btn-primary' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<% end %>

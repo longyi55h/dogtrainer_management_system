@@ -12,17 +12,20 @@ class DogkartesController < ApplicationController
 
   def new
     @dog = Dog.find(params[:dog_id])
-    @dogkarte = @dog.dogkartes.build if signed_in?
+    @dogkarte = Dogkarte.new(dog: @dog)
+    # @dogkarte = @dog.dogkartes.build if signed_in?
+    # @dogkarte = Dogkarte.new
   end
 
   def create
     @dog = Dog.find(params[:dog_id])
     @dogkarte = @dog.dogkartes.build(dogkarte_params)
-    @dogkarte.owner_id = @dog.owner.id
+    @dogkarte.owner_id = @dog.owner_id
     if @dogkarte.save
       flash[:success] = 'カルテ登録！'
       redirect_to dog_dogkarte_path(@dog, @dogkarte)
     else
+      flash[:error] = 'カルテ登録失敗！'
       render :new
     end
   end
@@ -33,24 +36,26 @@ class DogkartesController < ApplicationController
   end
 
   def update
+    @dogkarte = Dogkarte.find(params[:id])
     @dog = Dog.find(params[:dog_id])
-    @dogkarte = @dog.dogkartes.build(dogkarte_params)
-    @dogkarte.owner_id = @dog.owner.id
+    # @dogkarte = @dog.dogkartes.build(dogkarte_params)
+    @dogkarte.owner_id = @dog.owner_id
     if @dogkarte.update_attributes(dogkarte_params)
       flash[:success] = 'カルテ編集！'
       redirect_to dog_dogkarte_path(@dog, @dogkarte)
     else
+      flash[:error] = 'カルテ編集失敗！'
       render :edit
     end
   end
 
   def destroy
     @dogkarte = Dogkarte.find(params[:id])
-    logger.debug('*')
     if @dogkarte.destroy
       flash[:success] = 'カルテ削除'
       redirect_to dog_dogkartes_path
     else
+      flash[:error] = 'カルテ削除失敗！'
       render :index
     end
   end
@@ -77,4 +82,5 @@ class DogkartesController < ApplicationController
         :training_image_path3_cache,
         :training_image_path4_cache)
     end
+    
 end

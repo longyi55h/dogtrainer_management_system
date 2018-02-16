@@ -1,14 +1,14 @@
 <header>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <%= link_to "logo", root_path, class: "navbar-brand" %>
+    <nav class='navbar navbar-default navbar-fixed-top'>
+        <div class='container'>
+            <div class='navbar-header'>
+                <%= link_to 'ホーム', root_path, class: 'navbar-brand' %>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><%= link_to "ドッグ一覧", dogs_path %></li>
-                <li><%= link_to "オーナー一覧", owners_path %></li>
-                <li><%= link_to "アカウント設定", "#" %></li>
-                <li><%= link_to "logout", destroy_user_session_path, method: "delete" %></li>
+            <ul class='nav navbar-nav navbar-right'>
+                <li><%= link_to 'ドッグ一覧', dogs_path %></li>
+                <li><%= link_to 'オーナー一覧', owners_path %></li>
+                <!--<li><%= link_to 'アカウント設定', '#' %></li>-->
+                <li><%= link_to 'ログアウト', destroy_user_session_path, method: 'delete' %></li>
             </ul>
         </div>
     </nav>

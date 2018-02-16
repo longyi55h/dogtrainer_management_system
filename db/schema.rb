@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113053057) do
+ActiveRecord::Schema.define(version: 20180110054010) do
 
   create_table "dogkartes", force: true do |t|
     t.integer  "dog_id",                              null: false
     t.integer  "owner_id",                            null: false
-    t.datetime "training_date",                       null: false
+    t.datetime "training_date"
     t.integer  "training_session",       limit: 3
     t.integer  "training_times",         limit: 3
     t.string   "training_status",        limit: 20

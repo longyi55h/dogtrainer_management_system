@@ -1,6 +1,23 @@
 @import "bootstrap";
 
 /* universal */
+.jumbotron {
+    background:url(IMG_5502.JPG) center no-repeat; background-size: cover;
+    color: white;
+}
+ 
+// .form-group {
+//     border: 1px solid lime;   
+// }
+
+// div {
+//     border: 1px solid red;   
+// }
+
+b {
+    margin-right: 2px;
+    margin-left: 2px;
+}
 
 html {
     // overflow-y: scroll;
@@ -74,10 +91,13 @@ textarea {
 }
 
 /* main */
-.main {
-    border: 1px solid red;
-}
+// .main {
+//     border: 1px solid red;
+// }
 
+// .pad .col-lg-4 {
+//     padding: 0 0;
+// }
 
 /* mixins, variables, etc. */
 

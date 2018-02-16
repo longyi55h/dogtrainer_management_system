@@ -1,0 +1,40 @@
+<div class='col-lg-3'>
+    <% if @dogkarte.training_image_path1? %>
+        <%= image_tag @dogkarte.training_image_path1.thumb.url %>
+    <% else %>
+        <img src='http://placehold.jp/24/bbbcc7/706767/250x150.png?text=トレーニング画像1' class='thumbnail'>
+    <% end %>
+    <%= f.label :training_image_path1, '画像編集', class: 'control-label btn btn-primary' %>
+    <%= f.file_field :training_image_path1, class: 'fileInput', style: 'display:none' %>
+    <%= f.hidden_field :training_image_path1_cache %>
+</div>
+<div class='col-lg-3'>
+    <% if @dogkarte.training_image_path2? %>
+        <%= image_tag @dogkarte.training_image_path2.thumb.url %>
+    <% else %>
+        <img src='http://placehold.jp/24/bbbcc7/706767/250x150.png?text=トレーニング画像2' class='thumbnail'>
+    <% end %>
+    <%= f.label :training_image_path2, '画像編集', class: 'control-label btn btn-primary' %>
+    <%= f.file_field :training_image_path2, class: 'fileInput', style: 'display:none' %>
+    <%= f.hidden_field :training_image_path2_cache %>
+</div>
+<div class='col-lg-3'>
+    <% if @dogkarte.training_image_path3? %>
+        <%= image_tag @dogkarte.training_image_path3.thumb.url %>
+    <% else %>
+        <img src='http://placehold.jp/24/bbbcc7/706767/250x150.png?text=トレーニング画像3' class='thumbnail'>
+    <% end %>
+    <%= f.label :training_image_path3, '画像編集', class: 'control-label btn btn-primary' %>
+    <%= f.file_field :training_image_path3, class: 'fileInput', style: 'display:none' %>
+    <%= f.hidden_field :training_image_path3_cache %>
+</div>
+<div class='col-lg-3'>
+    <% if @dogkarte.training_image_path4? %>
+        <%= image_tag @dogkarte.training_image_path4.thumb.url %>
+    <% else %>
+        <img src='http://placehold.jp/24/bbbcc7/706767/250x150.png?text=トレーニング画像4' class='thumbnail'>
+    <% end %>
+    <%= f.label :training_image_path4, '画像編集', class: 'control-label btn btn-primary' %>
+    <%= f.file_field :training_image_path4, class: 'fileInput', style: 'display:none' %>
+    <%= f.hidden_field :training_image_path4_cache %>
+</div>

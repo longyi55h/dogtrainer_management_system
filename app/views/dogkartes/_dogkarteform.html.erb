@@ -1,0 +1,141 @@
+<%= form_for [@dog, @dogkarte], html: { class: 'form-horizontal' } do |f| %>
+<% if local_assigns[:flg] != 'show' %>
+    <fieldset>
+<% else %>
+    <fieldset disabled>
+<% end %>
+        <div class='row'>
+            <div class='col-md-3 col-lg-3'>
+                <div class='form-group'>
+                    <%= image_tag @dog.dog_image_path.thumb.url %>
+                </div>
+            </div>
+            <div class='col-md-9 col-lg-9'>
+                <div class='form-group'>
+                    <div class='col-md-2 col-lg-2'>
+                        <%= label :owner_name, 'オーナー名：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-3 col-lg-3'>
+                        <p class='form-control-static'><%= @dog.owner.owner_lastname %><%= @dog.owner.owner_firstname %></p>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-2 col-lg-2'>
+                        <%= label :dog_name, '犬名：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-3 col-lg-3'>
+                        <p class='form-control-static'><%= @dog.dog_name %></p>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-2 col-lg-2'>
+                        <%= label :dog_age, '犬年齢：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-3 col-lg-3'>
+                        <p class='form-control-static'><%= "#{(Date.today.try(:strftime, '%Y%m%d').to_i - @dog.dog_birthday.try(:strftime, '%Y%m%d').to_i) / 10000}歳" if @dog.dog_birthday? %></p>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-2 col-lg-2'>
+                        <%= label :dog_breed, '犬種：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-3 col-lg-3'>
+                        <p class='form-control-static'><%= @dog.dog_breed %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-5 col-lg-5'>
+                <div class='form-group'>
+                    <div class='col-md-6 col-lg-5'>
+                        <%= f.label :training_date, 'トレーニング日：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-6 col-lg-3 col-lg-offset-4'>
+                        <%= f.date_field :training_date, class: 'form-control'%>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-6 col-lg-5'>
+                        <%= f.label :training_session, 'トレーニングセッション：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-6 col-lg-3 col-lg-offset-4'>
+                        <%= f.select :training_session, (1..99), {:include_blank => true}, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-6 col-lg-5'>
+                        <%= f.label :training_times, 'トレーニング回数：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-6 col-lg-3 col-lg-offset-4'>
+                        <%= f.select :training_times, (1..99), {:include_blank => true}, class: 'form-control'%>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-6 col-lg-5'>
+                        <%= f.label :training_status, 'トレーニングステータス：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-6 col-lg-3 col-lg-offset-4'>
+                        <%= f.select :training_status, {'TR開始' => 'TR開始', 'TR中' => 'TR中', 'TR完了' => 'TR完了' }, {:include_blank => true}, class: 'form-control'%>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-6 col-lg-5'>
+                        <%= f.label :training_dogwalk_times, '散歩回数／1日：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-6 col-lg-3 col-lg-offset-4'>
+                        <%= f.select :training_dogwalk_times, (1..9), {:include_blank => true}, class: 'form-control'%>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='col-md-6 col-lg-5'>
+                        <%= f.label :training_dogwalk_hours, '散歩時間／1回：', class: 'control-label' %>
+                    </div>
+                    <div class='col-md-6 col-lg-3 col-lg-offset-4'>
+                        <%= f.select :training_dogwalk_hours, (1..9), {:include_blank => true}, class: 'form-control'%>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-7 col-lg-7'>
+                <div class='form-group'>
+                    <div class='col-lg-3'>
+                        <%= f.label :training_detail, 'トレーニング詳細：', class: 'control-label' %>
+                    </div>
+                    <div class='col-lg-9'>
+                        <%= f.text_area :training_detail, :size => '60x10' , class: 'form-control' %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-lg-12'>
+                <div class='form-group'>
+                <% if local_assigns[:flg] == 'new' %>
+                    <%= render 'dogkartes/dogkartenew', f: f %>
+                <% elsif local_assigns[:flg] == 'show' %>
+                    <%= render 'dogkartes/dogkarteshow', f: f %>
+                <% else %>
+                    <%= render 'dogkartes/dogkarteedit', f: f %>
+                <% end %>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class='row'>
+        <div class='col-md-4 col-lg-4'>
+            <div class='form-group'>
+                <% if local_assigns[:flg] == 'new' %>
+                    <%= f.submit '確定', class: 'btn btn-primary' %>
+                    <%= link_to 'キャンセル', :back, class: 'btn btn-primary' %>
+                <% elsif local_assigns[:flg] == 'edit' %>
+                    <%= f.submit '確定', class: 'btn btn-primary' %>
+                    <%= link_to 'キャンセル', :back, class: 'btn btn-primary' %>
+                <% else %>
+                    <%= link_to '編集', edit_dog_dogkarte_path(@dog, @dogkarte), class: 'btn btn-primary' %>
+                    <%= link_to 'キャンセル', :back, class: 'btn btn-primary' %>
+                    <%= link_to 'カルテ一覧', dog_dogkartes_path(@dog), class: 'btn btn-primary' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<% end %>

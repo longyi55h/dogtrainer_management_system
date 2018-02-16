@@ -1,11 +1,61 @@
-<h1>Dogkartes#index</h1>
-<p>Find me in app/views/dogkartes/index.html.erb</p>
-<p>オーナー：<%= @owner.owner_lastname %><%= @owner.owner_firstname %></p>
-<p>名前：<%= @dog.dog_name %></p>
-<p>年齢：
-    <%= "#{(Date.today.try(:strftime, "%Y%m%d").to_i - @dog.dog_birthday.try(:strftime, "%Y%m%d").to_i) / 10000}歳" if @dog.dog_birthday? %>
-</p>
-<p>犬種：<%= @dog.dog_breed %></p>
-<%= render @dogkartes %>
-<%= link_to "新規登録", new_dog_dogkarte_path(@dog) %>
-<%= link_to "キャンセル", :back %>
+<div class='form-horizontal'>
+<h2>ドッグカルテ一覧ページ</h2>
+<% if @dogkartes.any? %>
+    <div class='form-group'>
+        <div class='col-md-3 col-lg-3'>
+            <div class='form-group'>
+                <%= image_tag @dog.dog_image_path.thumb.url %>
+            </div>
+        </div>
+
+        <div class='col-md-9 col-lg-9'>
+            <div class='form-group'>
+                <div class='col-md-2 col-lg-2'>
+                    <%= label :owner_name, 'オーナー名：', class: 'control-label' %>
+                </div>
+                <div class='col-md-3 col-lg-3'>
+                    <p class='form-control-static'><%= @dog.owner.owner_lastname %><%= @dog.owner.owner_firstname %></p>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-md-2 col-lg-2'>
+                    <%= label :dog_name, '犬名：', class: 'control-label' %>
+                </div>
+                <div class='col-md-3 col-lg-3'>
+                    <p class='form-control-static'><%= @dog.dog_name %></p>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-md-2 col-lg-2'>
+                    <%= label :dog_age, '年齢：', class: 'control-label' %>
+                </div>
+                <div class='col-md-3 col-lg-3'>
+                    <p class='form-control-static'><%= "#{(Date.today.try(:strftime, '%Y%m%d').to_i - @dog.dog_birthday.try(:strftime, '%Y%m%d').to_i) / 10000}歳" if @dog.dog_birthday? %></p>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='col-md-2 col-lg-2'>
+                    <%= label :dog_age, '犬種：', class: 'control-label' %>
+                </div>
+                <div class='col-md-3 col-lg-3'>
+                    <p class='form-control-static'><%= @dog.dog_breed %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='form-group'>
+        <table class='table table-striped table-bordered table-hover'>
+            <thead>
+                <tr>
+                    <th>カルテNo.</th><th>トレーニング日時</th><th>トレーニングセッション</th><th>トレーニング回数</th><th>トレーニングステータス</th><th>削除</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= render @dogkartes %>
+            </tbody>
+        </table>
+        <%= link_to "新規登録", new_dog_dogkarte_path(@dog), class: 'btn btn-primary' %>
+        <%= link_to "キャンセル", :back, class: 'btn btn-primary' %>
+    </div>
+</div>
+<% end %>

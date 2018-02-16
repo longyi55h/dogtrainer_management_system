@@ -1,0 +1,28 @@
+<div class='col-lg-3'>
+    <% if @dogkarte.training_image_path1? %>
+        <%= image_tag @dogkarte.training_image_path1.thumb.url %>
+    <% else %>
+        <img src='http://placehold.jp/24/bbbcc7/706767/250x150.png?text=トレーニング画像1' class='thumbnail'>
+    <% end %>
+</div>
+<div class='col-lg-3'>
+    <% if @dogkarte.training_image_path2? %>
+        <%= image_tag @dogkarte.training_image_path2.thumb.url %>
+    <% else %>
+        <img src='http://placehold.jp/24/bbbcc7/706767/250x150.png?text=トレーニング画像2' class='thumbnail'>
+    <% end %>
+</div>
+<div class='col-lg-3'>
+    <% if @dogkarte.training_image_path3? %>
+        <%= image_tag @dogkarte.training_image_path3.thumb.url %>
+    <% else %>
+        <img src='http://placehold.jp/24/bbbcc7/706767/250x150.png?text=トレーニング画像3' class='thumbnail'>
+    <% end %>
+</div>
+<div class='col-lg-3'>
+    <% if @dogkarte.training_image_path4? %>
+        <%= image_tag @dogkarte.training_image_path4.thumb.url %>
+    <% else %>
+        <img src='http://placehold.jp/24/bbbcc7/706767/250x150.png?text=トレーニング画像4' class='thumbnail'>
+    <% end %>
+</div>

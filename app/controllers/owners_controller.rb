@@ -34,6 +34,7 @@ class OwnersController < ApplicationController
       redirect_to owner_path(@owner)
     else
       # render 'owners/"#{params[:id]}"/edit'
+      flash[:error] = 'オーナー編集失敗！'
       render 'edit'
     end
   end
@@ -44,6 +45,7 @@ class OwnersController < ApplicationController
       flash[:success] = 'オーナー削除！'
       redirect_to owners_path
     else
+      flash[:error] = 'オーナー削除失敗！'
       render owners_path
     end
   end

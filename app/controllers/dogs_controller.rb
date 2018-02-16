@@ -19,9 +19,10 @@ class DogsController < ApplicationController
         @dog.owner.user_id = current_user.id
         @dog.user_id = current_user.id
         if @dog.save
-            flash[:success] = "ドッグ作成！"
+            flash[:success] = 'ドッグ作成！'
             redirect_to dog_path(@dog)
         else
+            flash[:error] = 'ドッグ作成失敗！'
             render 'dogs/new'
         end
     end
@@ -36,6 +37,7 @@ class DogsController < ApplicationController
             flash[:success] = 'ドッグ編集！'
             redirect_to dog_path
         else
+            flash[:error] = 'ドッグ編集失敗！'
             render 'edit'
         end
     end
@@ -46,6 +48,7 @@ class DogsController < ApplicationController
             flash[:success] = 'ドッグ削除！'
             redirect_to dogs_path
         else
+            flash[:error] = 'ドッグ削除失敗！'
             render dogs_path
         end
     end
